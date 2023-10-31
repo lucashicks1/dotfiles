@@ -20,6 +20,11 @@ Then obviously change fish to be your default shell
 ```
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 ```
+- Pyenv
+- Poetry
+```
+curl -sSL https://install.python-poetry.org | python3 -
+```
 
 
 ## Setup
