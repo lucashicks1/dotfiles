@@ -7,3 +7,7 @@ pyenv init - | source
 
 # Starship setup
 starship init fish | source
+
+# Basic aliases
+alias vim='lvim'
+alias nvim='lvim'
