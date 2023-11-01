@@ -47,6 +47,13 @@ chmod u+x nvim.appimage
 ```
 LV_BRANCH='release-1.3/neovim-0.9' bash (curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh | psub)
 ```
+- Lazygit
+```
+brew install jesseduffield/lazygit/lazygit
+# OR RHEL
+sudo dnf copr enable atim/lazygit -y
+sudo dnf install lazygit
+```
 
 
 ## Setup
