@@ -54,6 +54,11 @@ brew install jesseduffield/lazygit/lazygit
 sudo dnf copr enable atim/lazygit -y
 sudo dnf install lazygit
 ```
+- Clipboard support for non-mac
+```
+sudo apt install xclip # Ubuntu
+sudo pacman -S xclip # Arch
+```
 
 
 ## Setup

@@ -13,8 +13,7 @@ wk.mappings["m"] = {
 
 wk.mappings["h"] = {}
 
-wk.mappings["t"] = {
+wk.mappings["T"] = {
   name = ' ' .. kind.icons.term .. " Terminal",
-  t = {":ToggleTerm direction=tab<cr>", "Open Terminal"},
-  c = {":ToggleTerm<cr>", "Close Terminal"},
+  t = {":terminal<cr>", "Open Terminal"},
 }
