@@ -51,6 +51,10 @@ lvim.plugins = {
 
 {
     'tiagovla/scope.nvim'
+  },
+
+  {
+    'carlsmedstad/vim-bicep'
   }
 
 }
