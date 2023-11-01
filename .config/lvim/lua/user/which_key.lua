@@ -9,7 +9,12 @@ wk.mappings["m"] = {
   a = {":lua require ('harpoon.ui').nav_file(1)<cr>", "Goto mark 1"},
   s = {":lua require ('harpoon.ui').nav_file(2)<cr>", "Goto mark 2"},
   d = {":lua require ('harpoon.ui').nav_file(3)<cr>", "Goto mark 3"},
-  f = {":lua require ('harpoon.ui').nav_file(4)<cr>", "Goto mark 4"},
-}
+  f = {":lua require ('harpoon.ui').nav_file(4)<cr>", "Goto mark 4"}, }
 
-wk.mappings["X"] = {":wq<cr>", "Save file and quit"}
+wk.mappings["h"] = {}
+
+wk.mappings["t"] = {
+  name = ' ' .. kind.icons.term .. " Terminal",
+  t = {":ToggleTerm direction=tab<cr>", "Open Terminal"},
+  c = {":ToggleTerm<cr>", "Close Terminal"},
+}

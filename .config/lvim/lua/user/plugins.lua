@@ -45,6 +45,19 @@ lvim.plugins = {
   {
   "mrjones2014/nvim-ts-rainbow",
   },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+  },
+
+  {
+    "romgrk/barbar.nvim",
+    dependencies = {
+      'lewis6991/gitsigns.nvim',
+      'nvim-tree/nvim-web-devicons'
+    }
+
+  }
 }
 
 lvim.builtin.treesitter.rainbow.enable = true
