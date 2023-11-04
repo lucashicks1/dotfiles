@@ -15,7 +15,8 @@ lvim.builtin.treesitter.ensure_installed = {
   "python",
   "lua",
   "yaml",
-  "bash"
+  "bash",
+  "dockerfile",
 }
 
 -- Help nvim know what project you're in
