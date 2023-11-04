@@ -55,8 +55,7 @@ lvim.plugins = {
 
   {
     'carlsmedstad/vim-bicep'
-  }
-
+  },
 }
 
 lvim.builtin.treesitter.rainbow.enable = true
