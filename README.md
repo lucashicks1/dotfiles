@@ -55,8 +55,6 @@ let g:python_host_prog = "/Users/lucas/venvs/.nvim-venv/bin/python"
 let g:python3_host_prog = "/Users/lucas/venvs/.nvim-venv/bin/python"
 ```
 
-**NOTE:** Install neovim python stuff using `python -m pip install neovim`
-
 - LunarVim
 ```
 LV_BRANCH='release-1.3/neovim-0.9' bash (curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh | psub)
