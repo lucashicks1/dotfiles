@@ -43,6 +43,20 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 ./nvim.appimage
 ```
+
+Then create a venv just for nvim using this:
+```
+python3 -m venv ~/venvs/.nvim-venv && source ~/venvs/.nvim-venv/bin/activate && python3 -m pip install pynvim && which python
+```
+This will output a path to the current version of python, which you put in the `init.vim` file in the `.config/nvim` directory.
+
+```
+let g:python_host_prog = "/Users/lucas/venvs/.nvim-venv/bin/python"
+let g:python3_host_prog = "/Users/lucas/venvs/.nvim-venv/bin/python"
+```
+
+**NOTE:** Install neovim python stuff using `python -m pip install neovim`
+
 - LunarVim
 ```
 LV_BRANCH='release-1.3/neovim-0.9' bash (curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh | psub)
