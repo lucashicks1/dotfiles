@@ -2,6 +2,7 @@
 local servers = {
   bashls = {},
   clangd = {},
+  ts_ls = {},
   dockerls = {},
   gopls = {},
   marksman = {},
