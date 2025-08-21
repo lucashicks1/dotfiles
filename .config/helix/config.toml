@@ -1,0 +1,12 @@
+theme = "catppuccin_mocha"
+
+[editor]
+true-color = true
+undercurl = true
+bufferline = "always"
+rulers = [100]
+text-width = 80
+
+[editor.soft-wrap]
+enable = true
+wrap-at-text-width = true
