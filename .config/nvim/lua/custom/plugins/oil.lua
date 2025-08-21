@@ -22,6 +22,10 @@ return {
 
       view_options = {
         show_hidden = true,
+        is_hidden_file = function(name, _)
+          local m = name:match '^%.'
+          return m ~= nil
+        end,
       },
     },
     config = function()

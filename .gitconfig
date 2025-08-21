@@ -1,5 +1,5 @@
 [core]
-	excludesfile = /Users/lucas/.gitignore_global
+	excludesfile = ~/Users/lucas/.gitignore_global
 [user]
 	name = lucashicks1
 	email = lucasjhicks1@gmail.com
@@ -8,3 +8,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[init]
+	defaultBranch = main
