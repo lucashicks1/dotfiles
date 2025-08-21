@@ -1,4 +1,5 @@
 \.git
 misc
+.gitignore
 README.md
 #LICENSE
