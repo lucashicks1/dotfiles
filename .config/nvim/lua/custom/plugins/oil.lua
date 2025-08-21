@@ -3,33 +3,32 @@ return {
     'stevearc/oil.nvim',
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
     lazy = false,
-    opts = {
-      default_file_explorer = true,
-      columns = {
-        'type',
-        'icon',
-      },
-      buf_options = {
-        buflisted = false,
-        bufhidden = 'hide',
-      },
-      skip_confirm_for_simple_edits = true,
-      lsp_file_methods = {
-        enabled = true, -- Enable or disable LSP file operations
-        timeout_ms = 1000, -- Time to wait for LSP file operations to complete before skipping
-        autosave_changes = false,
-      },
-
-      view_options = {
-        show_hidden = true,
-        is_hidden_file = function(name, _)
-          local m = name:match '^%.'
-          return m ~= nil
-        end,
-      },
-    },
+    opts = {},
     config = function()
-      require('oil').setup {} -- make sure oil is loaded
+      require('oil').setup {
+        default_file_explorer = true,
+        delete_to_trash = true,
+        skip_confirm_for_simple_edits = true,
+        view_options = {
+          show_hidden = true,
+          is_hidden_file = function(name, _)
+            local m = name:match '^%.'
+            return m ~= nil
+          end,
+        },
+        columns = {
+          'icon',
+        },
+        buf_options = {
+          buflisted = false,
+          bufhidden = 'hide',
+        },
+        lsp_file_methods = {
+          enabled = true, -- Enable or disable LSP file operations
+          timeout_ms = 1000, -- Time to wait for LSP file operations to complete before skipping
+          autosave_changes = false,
+        },
+      } -- make sure oil is loaded
       -- then do the keymap
       vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
     end,
