@@ -5,7 +5,6 @@ local servers = {
   ts_ls = {},
   dockerls = {},
   gopls = {},
-  marksman = {},
   ruff = {},
   rust_analyzer = {},
   pyright = {},
@@ -42,7 +41,15 @@ return {
     -- Automatically install LSPs and related tools to stdpath for Neovim
     -- Mason must be loaded before its dependents so we need to set it up here.
 
-    { 'mason-org/mason.nvim', opts = {} },
+    {
+      'mason-org/mason.nvim',
+      opts = {
+        registries = {
+          'github:mason-org/mason-registry',
+          'github:Crashdummyy/mason-registry',
+        },
+      },
+    },
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
 
