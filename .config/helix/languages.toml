@@ -1,5 +1,4 @@
 [[language]]
 name = "rust"
-language-servers = [
-  "rust-analyzer",
-]
+auto-format = true
+language-servers = ["rust-analyzer"]
