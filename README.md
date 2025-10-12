@@ -1,69 +1,22 @@
 # Config stuff and dotfiles
 
-## Requirments - UNDERGOING CHANGE
+## Overview
 
-- GNU Stow -> to get dotfiles stored properly
-- Starship -> nicer terminal prompt
-- Bash -> I find bash shell nicer than zsh/fish
+All my dotfiles and config for some of the tools I use.
 
-```
-curl -sS https://starship.rs/install.sh | sh
-```
+Things that I use:
 
-- Pyenv
-- Poetry
-
-```
-curl -sSL https://install.python-poetry.org | python3 -
-```
-
-- Rust
-
-```
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-- Make
-- Git
-- Pip
-- NPM
-- Node
-- Cargo
-- Neovim
-
-```
-brew install neovim
-# OR
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-./nvim.appimage
-```
-
-Then create a venv just for nvim using this:
-
-```
-python3 -m venv ~/venvs/.nvim-venv && source ~/venvs/.nvim-venv/bin/activate && python3 -m pip install pynvim && which python
-```
-
-This will output a path to the current version of python, which you put in the `init.vim` file in the `.config/nvim` directory.
-
-```
-let g:python_host_prog = "/Users/lucas/venvs/.nvim-venv/bin/python"
-let g:python3_host_prog = "/Users/lucas/venvs/.nvim-venv/bin/python"
-```
-
-- Clipboard support for non-mac
-
-```
-sudo apt install xclip # Ubuntu
-sudo pacman -S xclip # Arch
-```
+- GNU Stow - This creates all the symlinks and is used in the `stow.sh` script.
+- Bash - I find that bash has everything I need in a shell. I've tried using fish and zsh, but they were both too bloated for my liking.
+- TMUX - just a great multiplexer
+- Neovim - I tend to use this for most of my text editing needs (Sometimes I'll jump on vscode if I'm doing C#).
+- Helix - I'm trying to give this a go, but vim bindings are too stuck in my head
 
 ## Setup
 
-To fix up all the symlinks, just run
+To setup the symlinks, first download [GNU Stow](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.gnu.org/software/stow/&ved=2ahUKEwjev8WX4J2QAxXmf_UHHRPBCdgQFnoECBoQAQ&usg=AOvVaw1_dOGBnuyl4QIMzXe232eI) and then run the `stow.sh` script in the root of this repo.
 
-```
-cd ~/.dotfiles
-stow .
+```bash
+cd dotfiles
+./stow.sh
 ```
