@@ -1,2 +1,2 @@
 #!/bin/bash
-stow -t ~ . --adopt
+stow -t ~ .

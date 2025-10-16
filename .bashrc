@@ -11,3 +11,12 @@ alias vim="nvim"
 alias ls='ls --color=auto'
 alias ll="ls -lh"
 alias la="ls -A"
+
+COMPLETIONS_DIR="$HOME/.dotfiles/.config/bash/completions"
+
+# Just  put these here because the location of native completions changes based on platform
+if [ -d "$COMPLETIONS_DIR" ]; then
+    for f in "$COMPLETIONS_DIR"/*; do
+        [ -f "$f" ] && source "$f"
+    done
+fi
