@@ -1,14 +1,11 @@
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 
 -- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
+-- Diagnostics
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Disable arrow keys in normal mode - DONT BE LIKE JACKSON
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -23,26 +20,23 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
-    desc = 'Highlight when yanking (copying) text',
-    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
--- [[ BarBar Binds ]]
 local function map(mode, lhs, rhs, desc)
-    local opts = vim.tbl_extend('force', { noremap = true, silent = true }, { desc = desc })
-    vim.keymap.set(mode, lhs, rhs, opts)
+  local opts = vim.tbl_extend('force', { noremap = true, silent = true }, { desc = desc })
+  vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+-- [[ BarBar Binds ]]
 -- Move to previous/next
 map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', 'Previous buffer')
 map('n', '<A-.>', '<Cmd>BufferNext<CR>', 'Next Buffer')
