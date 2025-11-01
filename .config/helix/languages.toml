@@ -1,4 +1,27 @@
+# Rust
 [[language]]
 name = "rust"
 auto-format = true
 language-servers = ["rust-analyzer"]
+
+# Python
+[[language]]
+name = "python"
+auto-format = true
+language-servers = ["pylsp"]
+
+[language-server.pylsp.config.pylsp.plugins.ruff]
+lineLength = 100
+preview = true
+select = ["*"]
+ignore = []
+
+[language-server.pylsp.config.pylsp]
+plugins.pylsp_mypy.enabled = true
+plugins.pylsp_mypy.live_mode = true
+
+# Go
+[[language]]
+name = "go"
+auto-format = true
+formatter = { command = "goimports" }

@@ -13,12 +13,8 @@ HOMEBREW_PATHS=(
 
 USER_PATHS=(
   "$HOME/.local/bin"
+  "$HOME/go/bin"
   "$HOME/.cargo/bin"
-  "$HOME/Library/Application Support/Coursier/bin"
-)
-
-CUSTOM_PATHS=(
-  /opt/homebrew/opt/dotnet@6/bin
 )
 
 # function to add dirs to PATH
@@ -31,7 +27,6 @@ add_paths() {
 # Append to PATH
 add_paths "${HOMEBREW_PATHS[@]}"
 add_paths "${USER_PATHS[@]}"
-add_paths "${CUSTOM_PATHS[@]}"
 
 export PATH
 
