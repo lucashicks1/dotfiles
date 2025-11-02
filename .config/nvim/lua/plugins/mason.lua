@@ -22,7 +22,7 @@ return {
       ensure_installed = {
         -- Languages
         'bashls', -- Bash
-        'pyrefly', -- Python
+        'basedpyright', -- Python
         'gopls', -- Go
         -- 'rust-analyzer', -- THIS IS ALREADY HANDLED BY RUSTACEANNVIM
         'clangd', -- C/C++
@@ -62,6 +62,7 @@ return {
         -- Config
         'prettypst', -- Typst
         'tflint', -- Terraform
+        'mbake', -- Makefiles
       },
     },
   },

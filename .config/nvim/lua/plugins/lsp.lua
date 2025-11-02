@@ -139,11 +139,5 @@ return {
         },
       },
     })
-
-    vim.lsp.config('pyrefly', {
-      settings = {
-        displayTypeErrors = 'force-on',
-      },
-    })
   end,
 }

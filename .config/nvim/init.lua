@@ -6,4 +6,5 @@ vim.g.loaded_node_provider = 0
 -- Loading config
 require 'keymaps'
 require 'options'
+require 'terminal'
 require 'lazy_init'

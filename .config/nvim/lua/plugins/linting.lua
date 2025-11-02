@@ -2,6 +2,7 @@
 local linters = {
   python = { 'ruff', 'mypy' },
   terraform = { 'tflint' },
+  makefile = { 'bake' },
 }
 
 return {

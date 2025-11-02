@@ -34,6 +34,7 @@ return {
       docker = { 'dockerfmt' },
       terraform = { 'terraform_fmt' },
       typst = { 'prettypst' },
+      makefile = { 'bake' },
 
       -- General formatters
       ['*'] = { 'codespell' },
