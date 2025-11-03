@@ -28,8 +28,16 @@ return {
           timeout_ms = 1000, -- Time to wait for LSP file operations to complete before skipping
           autosave_changes = false,
         },
+
+        keymaps = {
+          ['<C-h>'] = '<cmd>TmuxNavigateLeft<cr>',
+          ['<C-j>'] = '<cmd>TmuxNavigateDown<cr>',
+          ['<C-k>'] = '<cmd>TmuxNavigateUp<cr>',
+          ['<C-l>'] = '<cmd>TmuxNavigateRight<cr>',
+          ['-'] = { 'actions.parent', mode = 'n' },
+        },
       } -- make sure oil is loaded
-      -- then do the keymap
+
       vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
     end,
   },

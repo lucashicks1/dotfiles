@@ -4,6 +4,9 @@ alias ls='ls --color=auto'
 alias ll="ls -lh"
 alias la="ls -A"
 
+# Unbind Ctrl+L (So I'm forced to use `clear` which means I'll get used to using tmux)
+bind -r "\C-l"
+
 # NVM setup
 export NVM_DIR="$HOME/.nvm"
 [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
