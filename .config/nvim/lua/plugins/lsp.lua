@@ -82,6 +82,16 @@ return {
             end,
           })
         end
+
+        -- Enable inlay hints if supported
+        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+          -- Toggle inlay hints with a keymap
+          map('<leader>h', function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+          end, 'Toggle Inlay Hints')
+
+          vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+        end
       end,
     })
 
@@ -136,6 +146,22 @@ return {
         lint = {
           enabled = true,
           when = 'onSave',
+        },
+      },
+    })
+
+    -- Python Pyrefly
+    -- vim.lsp.config('pyrefly', {
+    --   settings = {
+    --     displayTypeErrors = 'force-on', -- I always want it to yell at me
+    --   },
+    -- })
+
+    -- Python Ruff
+    vim.lsp.config('ruff', {
+      capabilities = {
+        general = {
+          positionEncodings = { 'utf-16' },
         },
       },
     })

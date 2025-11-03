@@ -22,7 +22,11 @@ return {
       ensure_installed = {
         -- Languages
         'bashls', -- Bash
-        'basedpyright', -- Python
+
+        -- Python
+        'basedpyright',
+        -- 'pyrefly',
+
         'gopls', -- Go
         -- 'rust-analyzer', -- THIS IS ALREADY HANDLED BY RUSTACEANNVIM
         'clangd', -- C/C++
@@ -51,7 +55,6 @@ return {
 
         -- Python
         'ruff',
-        'mypy',
 
         'goimports', -- Go
         'clang-format', -- C/C++

@@ -1,6 +1,6 @@
 -- https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#available-linters
 local linters = {
-  python = { 'ruff', 'mypy' },
+  python = { 'ruff' },
   terraform = { 'tflint' },
   makefile = { 'bake' },
 }
