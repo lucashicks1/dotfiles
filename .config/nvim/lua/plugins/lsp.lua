@@ -23,7 +23,8 @@ return {
         map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
         map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
         map('gt', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
-        -- map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
+
+        map('sw', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
 
         -- Editor Actions
         map('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
@@ -41,7 +42,10 @@ return {
 
         -- Docs & hints
         map('K', vim.lsp.buf.hover, 'Hover Information')
-        map('<C-k>', vim.lsp.buf.signature_help, 'Show signature help')
+
+        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_signatureHelp, event.buf) then
+          map('<C-s>', vim.lsp.buf.signature_help, 'Show signature help')
+        end
 
         -- LSP Server Commands
         map('<leader>li', '<cmd>LspInfo<cr>', 'LSP Info')
@@ -81,16 +85,6 @@ return {
               vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
             end,
           })
-        end
-
-        -- Enable inlay hints if supported
-        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-          -- Toggle inlay hints with a keymap
-          map('<leader>h', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-          end, 'Toggle Inlay Hints')
-
-          vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
         end
       end,
     })
