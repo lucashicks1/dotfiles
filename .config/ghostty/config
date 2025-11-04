@@ -1,0 +1,5 @@
+theme = "catppuccin-mocha.conf"
+shell-integration = "bash"
+font-family = "Cascadia Code NF"
+confirm-close-surface = false
+quit-after-last-window-closed = true
