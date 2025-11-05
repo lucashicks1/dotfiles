@@ -24,8 +24,6 @@ return {
         map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
         map('gt', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
 
-        map('sw', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
-
         -- Editor Actions
         map('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
         map('<leader>ca', vim.lsp.buf.code_action, 'Show Code Actions', { 'n', 'x' })
@@ -42,10 +40,6 @@ return {
 
         -- Docs & hints
         map('K', vim.lsp.buf.hover, 'Hover Information')
-
-        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_signatureHelp, event.buf) then
-          map('<C-s>', vim.lsp.buf.signature_help, 'Show signature help')
-        end
 
         -- LSP Server Commands
         map('<leader>li', '<cmd>LspInfo<cr>', 'LSP Info')
@@ -64,6 +58,11 @@ return {
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_signatureHelp, event.buf) then
+          map('<C-s>', vim.lsp.buf.signature_help, 'Show signature help')
+        end
+
         if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
