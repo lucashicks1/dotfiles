@@ -12,6 +12,15 @@ Things that I use:
 - Neovim - I tend to use this for most of my text editing needs (Sometimes I'll jump on vscode if I'm doing C#).
 - Helix - I'm trying to give this a go, but vim bindings are too stuck in my head
 
+## Things to install
+- Neovim
+- Ripgrep -> for telescope.nvim
+- npm (ideally with nvm) -> for mason
+- luarocks -> blink.cmp needs jsregexp
+
+- Tmux
+- tpm
+
 ## Setup
 
 To setup the symlinks, first download [GNU Stow](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.gnu.org/software/stow/&ved=2ahUKEwjev8WX4J2QAxXmf_UHHRPBCdgQFnoECBoQAQ&usg=AOvVaw1_dOGBnuyl4QIMzXe232eI) and then run the `stow.sh` script in the root of this repo.
