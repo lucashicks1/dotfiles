@@ -17,12 +17,13 @@ return {
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
+        local lsp = vim.lsp
+
         -- Navigation
-        map('gr', require('telescope.builtin').lsp_references, 'Goto References')
-        map('gi', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
-        map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
-        map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
-        map('gt', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
+        map('gr', lsp.buf.references, 'Goto References')
+        map('gi', lsp.buf.implementation, 'Goto Implementation')
+        map('gd', lsp.buf.definition, 'Goto Definition')
+        map('gD', lsp.buf.declaration, 'Goto Declaration')
 
         -- Editor Actions
         map('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
@@ -155,6 +156,17 @@ return {
       capabilities = {
         general = {
           positionEncodings = { 'utf-16' },
+        },
+      },
+    })
+    vim.lsp.config('roslyn', {
+      settings = {
+        ['csharp|inlay_hints'] = {
+          csharp_enable_inlay_hints_for_implicit_object_creation = true,
+          csharp_enable_inlay_hints_for_implicit_variable_types = true,
+        },
+        ['csharp|code_lens'] = {
+          dotnet_enable_references_code_lens = true,
         },
       },
     })
