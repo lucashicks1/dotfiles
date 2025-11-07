@@ -1,11 +1,13 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
+local function map(mode, lhs, rhs, desc)
+  local opts = vim.tbl_extend('force', { noremap = true, silent = true }, { desc = desc })
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Diagnostics
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Disable arrow keys in normal mode - DONT BE LIKE JACKSON
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -13,17 +15,7 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
--- Keybinds to make split navigation easier.
--- CTRL+<hjkl> to switch between windows
--- DISABLING BECAUSE OF TMUX_VIM_NAVIGATOR
--- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
 -- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.hl.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -32,17 +24,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-local function map(mode, lhs, rhs, desc)
-  local opts = vim.tbl_extend('force', { noremap = true, silent = true }, { desc = desc })
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
-
--- [[ BarBar Binds ]]
--- Move to previous/next
+---------------------------------------------------
+---- Buffer Navigation ('A' is just Alt)
+---------------------------------------------------
 map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', 'Previous buffer')
 map('n', '<A-.>', '<Cmd>BufferNext<CR>', 'Next Buffer')
-
--- Goto buffer in position...
 map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', 'Goto Buffer 1')
 map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', 'Goto Buffer 2')
 map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', 'Goto Buffer 3')
@@ -53,13 +39,84 @@ map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', 'Goto Buffer 7')
 map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', 'Goto Buffer 8')
 map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', 'Goto Buffer 9')
 map('n', '<A-0>', '<Cmd>BufferLast<CR>', 'Goto Last Buffer')
-
--- Close buffer
 map('n', '<A-c>', '<Cmd>BufferClose<CR>', 'Close Buffer')
 map('n', '<A-s-c>', '<Cmd>BufferRestore<CR>', 'Restore Buffer')
 
--- Close commands -- :BufferCloseAllButCurrent, :BufferCloseAllButPinned, :BufferCloseAllButCurrentOrPinned, :BufferCloseBuffersLeft, :BufferCloseBuffersRight
+---------------------------------------------------
+---- LSP/Code
+---------------------------------------------------
+local lsp = vim.lsp
+-- Gotos
+map('n', 'gr', lsp.buf.references, 'LSP: Goto References')
+map('n', 'gi', lsp.buf.implementation, 'LSP: Goto Implementation')
+map('n', 'gd', lsp.buf.definition, 'LSP: Goto Definition')
+map('n', 'gD', lsp.buf.declaration, 'LSP: Goto Declaration')
 
--- Sort automatically by...
-map('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', 'Buffer order - number')
-map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', 'Buffer order - win number')
+-- Editor Actions
+map('n', '<leader>cr', lsp.buf.rename, 'LSP: Rename symbol')
+map({ 'n', 'x' }, '<leader>ca', lsp.buf.code_action, 'LSP: Show Code Actions')
+map('', '<leader>f', function()
+  require('conform').format { async = true, lsp_format = 'fallback' }
+end, 'Format')
+
+-- Docs & hints
+map('n', 'K', vim.lsp.buf.hover, 'Hover Information')
+
+-- LSP Server Commands
+map('n', '<leader>li', '<cmd>LspInfo<cr>', 'LSP Info')
+map('n', '<leader>lr', ':LspRestart<cr>', 'LSP Restart')
+map('n', '<leader>ll', ':LspLog<cr>', 'LSP Log')
+
+---------------------------------------------------
+---- Terminal
+---------------------------------------------------
+local term = require 'terminal'
+map('n', '<leader>t', term.FloatingTerminal, 'Toggle floating terminal')
+map('t', '<Esc>', term.CloseFloatingTerminal, 'Close floating terminal from terminal mode')
+
+---------------------------------------------------
+---- Diagnostics
+---------------------------------------------------
+map('n', '<leader>xd', '<cmd>Trouble diagnostics toggle filter.buf=0<CR>', 'Open trouble document diagnostics')
+map('n', '<leader>xw', '<cmd>Trouble diagnostics toggle<CR>', 'Open trouble workspace diagnostics')
+map('n', '<leader>d', vim.diagnostic.open_float, 'LSP: Show Diagnostics')
+
+---------------------------------------------------
+---- Searching (with telescope of course)
+---------------------------------------------------
+local telescope = require 'telescope.builtin'
+map('n', '<leader>sh', telescope.help_tags, 'Search: Help')
+map('n', '<leader>sk', telescope.keymaps, 'Search: Keymaps')
+map('n', '<leader>sg', telescope.live_grep, 'Search: Grep')
+map('n', '<leader>sd', telescope.diagnostics, 'Search: Diagnostics')
+map('n', '<leader>sw', telescope.lsp_dynamic_workspace_symbols, 'Search: Workspace Symbols')
+map('n', '<leader>sf', function()
+  telescope.find_files { no_ignore = true, hidden = true }
+end, 'Search: Files')
+
+---------------------------------------------------
+---- Debuggin
+---------------------------------------------------
+local dap = require 'dap'
+map('n', '<F5>', dap.continue, 'Debug: Start/Continue')
+map('n', '<F1>', dap.step_into, 'Debug: Step Into')
+map('n', '<F2>', dap.step_over, 'Debug: Step Over')
+map('n', '<F3>', dap.step_out, 'Debug: Step Out')
+map('n', '<F7>', require('dapui').toggle, 'Debug: See last session result')
+map('n', '<leader>Db', dap.toggle_breakpoint, 'Debug: Toggle Breakpoint')
+
+map({ 'n', 'v' }, '<leader>DB', function()
+  dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+end, 'Debug: Set Breakpoint')
+
+---------------------------------------------------
+---- Previewing Docs (typst, latex, etc.)
+---------------------------------------------------
+local omnipreview = require 'omni-preview.commands'
+map('n', '<leader>po', omnipreview.start, 'Preview: Start')
+map('n', '<leader>pc', omnipreview.stop, 'Preview: Stop')
+
+---------------------------------------------------
+---- Files
+---------------------------------------------------
+map('n', '-', '<CMD>Oil<CR>', 'Open parent directory')

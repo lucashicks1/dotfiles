@@ -3,7 +3,6 @@ return {
     'stevearc/oil.nvim',
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
     lazy = false,
-    opts = {},
     config = function()
       require('oil').setup {
         default_file_explorer = true,
@@ -37,8 +36,6 @@ return {
           ['-'] = { 'actions.parent', mode = 'n' },
         },
       } -- make sure oil is loaded
-
-      vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
     end,
   },
   -- LSP diags

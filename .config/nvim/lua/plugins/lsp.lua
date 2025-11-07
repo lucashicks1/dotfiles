@@ -10,41 +10,6 @@ return {
   config = function()
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(event)
-        -- In this case, we create a function that lets us more easily define mappings specific
-        -- for LSP related items. It sets the mode, buffer and description for us each time.
-        local map = function(keys, func, desc, mode)
-          mode = mode or 'n'
-          vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-        end
-
-        local lsp = vim.lsp
-
-        -- Navigation
-        map('gr', lsp.buf.references, 'Goto References')
-        map('gi', lsp.buf.implementation, 'Goto Implementation')
-        map('gd', lsp.buf.definition, 'Goto Definition')
-        map('gD', lsp.buf.declaration, 'Goto Declaration')
-
-        -- Editor Actions
-        map('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
-        map('<leader>ca', vim.lsp.buf.code_action, 'Show Code Actions', { 'n', 'x' })
-
-        local fmt = function()
-          vim.lsp.buf.format { async = true }
-        end
-
-        -- Diagnostics
-        map('<leader>d', vim.diagnostic.open_float, 'Show Diagnostics')
-        map('<leader>q', vim.diagnostic.setloclist, 'Diagnostics Quickfix')
-
-        -- Docs & hints
-        map('K', vim.lsp.buf.hover, 'Hover Information')
-
-        -- LSP Server Commands
-        map('<leader>li', '<cmd>LspInfo<cr>', 'LSP Info')
-        map('<leader>lr', ':LspRestart<cr>', 'LSP Restart')
-        map('<leader>ll', ':LspLog<cr>', 'LSP Log')
-
         -- This function resolves a difference between neovim 0.11 and 0.10
         local function client_supports_method(client, method, bufnr)
           if vim.fn.has 'nvim-0.11' == 1 then
@@ -57,10 +22,6 @@ return {
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_signatureHelp, event.buf) then
-          map('<C-s>', vim.lsp.buf.signature_help, 'Show signature help')
-        end
 
         if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })

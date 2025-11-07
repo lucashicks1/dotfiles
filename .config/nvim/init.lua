@@ -4,7 +4,9 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
 
 -- Loading config
-require 'keymaps'
-require 'options'
-require 'terminal'
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 require 'lazy_init'
+
+require 'options'
+require 'keymaps'
