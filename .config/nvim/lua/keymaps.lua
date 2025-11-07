@@ -18,7 +18,7 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
@@ -90,6 +90,9 @@ map('n', '<leader>sk', telescope.keymaps, 'Search: Keymaps')
 map('n', '<leader>sg', telescope.live_grep, 'Search: Grep')
 map('n', '<leader>sd', telescope.diagnostics, 'Search: Diagnostics')
 map('n', '<leader>sw', telescope.lsp_dynamic_workspace_symbols, 'Search: Workspace Symbols')
+map('n', '<leader>sr', function()
+  telescope.resume { initial_mode = 'normal' }
+end, 'Search: Resume in Normal Mode')
 map('n', '<leader>sf', function()
   telescope.find_files { no_ignore = true, hidden = true }
 end, 'Search: Files')
