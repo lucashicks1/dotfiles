@@ -33,8 +33,6 @@ return {
           vim.lsp.buf.format { async = true }
         end
 
-        map('<leader>fa', fmt, 'Format Document')
-
         -- Diagnostics
         map('<leader>d', vim.diagnostic.open_float, 'Show Diagnostics')
         map('<leader>q', vim.diagnostic.setloclist, 'Diagnostics Quickfix')
