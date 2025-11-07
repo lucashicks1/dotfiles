@@ -1,6 +1,8 @@
 theme = "catppuccin-mocha.conf"
 shell-integration = "bash"
 confirm-close-surface = false
+
+macos-option-as-alt = true
 quit-after-last-window-closed = true
 
 font-family = "Cascadia Code NF"
