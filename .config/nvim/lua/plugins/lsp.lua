@@ -48,9 +48,6 @@ return {
       end,
     })
 
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-
     -- Diagnostic Config
     -- See :help vim.diagnostic.Opts
     vim.diagnostic.config {
@@ -115,17 +112,6 @@ return {
       capabilities = {
         general = {
           positionEncodings = { 'utf-16' },
-        },
-      },
-    })
-    vim.lsp.config('roslyn', {
-      settings = {
-        ['csharp|inlay_hints'] = {
-          csharp_enable_inlay_hints_for_implicit_object_creation = true,
-          csharp_enable_inlay_hints_for_implicit_variable_types = true,
-        },
-        ['csharp|code_lens'] = {
-          dotnet_enable_references_code_lens = true,
         },
       },
     })
