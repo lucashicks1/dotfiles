@@ -12,12 +12,15 @@ Things that I use:
 - Neovim - I tend to use this for most of my text editing needs (Sometimes I'll jump on vscode if I'm doing C#).
 - Helix - I'm trying to give this a go, but vim bindings are too stuck in my head
 
-## Things to install
+## Things to install (I'll migrate to nix soon I promise)
+
+### Neovim
 - Neovim
 - Ripgrep -> for telescope.nvim
 - npm (ideally with nvm) -> for mason
 - luarocks -> blink.cmp needs jsregexp
 
+### Tmux
 - Tmux
 - tpm
 
