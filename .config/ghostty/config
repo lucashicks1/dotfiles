@@ -7,3 +7,4 @@ quit-after-last-window-closed = true
 
 font-family = "Cascadia Code NF"
 font-style = SemiBold
+font-size=20
