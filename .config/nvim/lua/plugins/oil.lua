@@ -14,6 +14,9 @@ return {
             local m = name:match '^%.'
             return m ~= nil
           end,
+          is_always_hidden = function(name, _)
+            return name == '__pycache__' or name == '.mypy_cache'
+          end,
         },
         columns = {
           'icon',

@@ -40,10 +40,11 @@ map('n', '<A-s-c>', '<Cmd>BufferRestore<CR>', 'Restore Buffer')
 ---- LSP/Code
 ---------------------------------------------------
 local lsp = vim.lsp
+local telescope = require 'telescope.builtin'
 -- Gotos
-map('n', 'gr', lsp.buf.references, 'LSP: Goto References')
-map('n', 'gi', lsp.buf.implementation, 'LSP: Goto Implementation')
-map('n', 'gd', lsp.buf.definition, 'LSP: Goto Definition')
+map('n', 'gr', telescope.lsp_references, 'LSP: Goto References')
+map('n', 'gi', telescope.lsp_implementations, 'LSP: Goto Implementation')
+map('n', 'gd', telescope.lsp_definitions, 'LSP: Goto Definition')
 map('n', 'gD', lsp.buf.declaration, 'LSP: Goto Declaration')
 
 -- Editor Actions
@@ -78,7 +79,6 @@ map('n', '<leader>d', vim.diagnostic.open_float, 'LSP: Show Diagnostics')
 ---------------------------------------------------
 ---- Searching (with telescope of course)
 ---------------------------------------------------
-local telescope = require 'telescope.builtin'
 map('n', '<leader>sh', telescope.help_tags, 'Search: Help')
 map('n', '<leader>sk', telescope.keymaps, 'Search: Keymaps')
 map('n', '<leader>sg', telescope.live_grep, 'Search: Grep')
