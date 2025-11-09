@@ -51,7 +51,6 @@ function M.FloatingTerminal()
 
   terminal_state.is_open = true
   vim.cmd 'startinsert'
-
   -- Auto-close on buffer leave
   vim.api.nvim_create_autocmd('BufLeave', {
     buffer = terminal_state.buf,
