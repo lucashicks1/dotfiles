@@ -3,7 +3,9 @@ shell-integration = "bash"
 confirm-close-surface = false
 
 macos-option-as-alt = true
+macos-titlebar-proxy-icon = hidden
 quit-after-last-window-closed = true
+title = ""
 
 font-family = "Cascadia Code NF"
 font-style = SemiBold

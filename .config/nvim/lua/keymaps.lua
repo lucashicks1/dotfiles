@@ -80,6 +80,7 @@ map('n', '<leader>d', vim.diagnostic.open_float, 'LSP: Show Diagnostics')
 ---- Searching (with telescope of course)
 ---------------------------------------------------
 map('n', '<leader>sh', telescope.help_tags, 'Search: Help')
+map('n', '<leader>sb', telescope.buffers, 'Search: Buffers')
 map('n', '<leader>sk', telescope.keymaps, 'Search: Keymaps')
 map('n', '<leader>sg', telescope.live_grep, 'Search: Grep')
 map('n', '<leader>sd', telescope.diagnostics, 'Search: Diagnostics')

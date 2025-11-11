@@ -23,6 +23,7 @@ return {
       debug = true,
       dependencies_bin = { ['tinymist'] = 'tinymist' },
       follow_cursor = true,
+      port = 13131,
 
       -- This sets the path of the typst file to be the working dir of where nvim is opened
       -- By default this is normally set to the directory of the opened file; however, this sometimes breaks
