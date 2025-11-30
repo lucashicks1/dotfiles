@@ -47,10 +47,4 @@ return {
     dependencies = { 'stevearc/oil.nvim' },
     opts = {},
   },
-  -- git status extension for oil
-  {
-    'benomahony/oil-git.nvim',
-    dependencies = { 'stevearc/oil.nvim' },
-    -- No opts or config needed! Works automatically
-  },
 }
