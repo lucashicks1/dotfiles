@@ -31,6 +31,7 @@ return {
     require('telescope').setup {
       defaults = {
         file_ignore_patterns = {
+          '.git/',
           '__pycache__',
           '%.mypy_cache',
           '%.pytest_cache',
