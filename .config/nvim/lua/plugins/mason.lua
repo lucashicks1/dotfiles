@@ -25,11 +25,9 @@ return {
 
         -- Python
         'basedpyright',
-        -- 'pyrefly',
 
         'gopls', -- Go
         -- 'rust-analyzer', -- THIS IS ALREADY HANDLED BY RUSTACEANNVIM
-        'clangd', -- C/C++
         'ts_ls', -- Typescript (just in case)
         'lua_ls', -- Lua
 
@@ -37,7 +35,6 @@ return {
         'tinymist', -- Typst
         'marksman', -- Markdown
         'dockerls', -- Docker
-        -- 'terraform-ls', -- Terraform
         'jsonls', -- JSON
         'yamlls', -- Yaml
       },
@@ -57,14 +54,12 @@ return {
         'ruff',
 
         'goimports', -- Go
-        'clang-format', -- C/C++
         'eslint', -- Typescript
         'prettierd', -- Prettierd
         'stylua', -- Lua
 
         -- Config
         'prettypst', -- Typst
-        'tflint', -- Terraform
         'mbake', -- Makefiles
       },
     },

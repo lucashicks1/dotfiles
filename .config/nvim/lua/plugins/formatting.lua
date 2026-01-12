@@ -14,8 +14,6 @@ return {
       bash = { 'shfmt' },
       python = { 'ruff_format', 'ruff_fix', 'ruff_organize_imports' },
       go = { 'goimports', 'gofmt' },
-      c = { 'clang-format ' },
-      cpp = { 'clang-format ' },
       typscript = { 'prettierd', 'prettier', stop_after_first = true },
       lua = { 'stylua' },
       rust = { 'rustfmt' },

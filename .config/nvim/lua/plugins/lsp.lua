@@ -100,13 +100,6 @@ return {
       },
     })
 
-    -- Python Pyrefly
-    -- vim.lsp.config('pyrefly', {
-    --   settings = {
-    --     displayTypeErrors = 'force-on', -- I always want it to yell at me
-    --   },
-    -- })
-
     -- Python Ruff
     vim.lsp.config('ruff', {
       capabilities = {
