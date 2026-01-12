@@ -1,6 +1,3 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = '\\'
-
 local function map(mode, lhs, rhs, desc)
   local opts = vim.tbl_extend('force', { noremap = true, silent = true }, { desc = desc })
   vim.keymap.set(mode, lhs, rhs, opts)
@@ -55,7 +52,9 @@ map('', '<leader>f', function()
 end, 'Format')
 
 -- Docs & hints
-map('n', 'K', vim.lsp.buf.hover, 'Hover Information')
+map('n', 'K', function()
+  lsp.buf.hover { border = 'rounded', title = 'Documentation' }
+end, 'Hover Information')
 
 -- LSP Server Commands
 map('n', '<leader>li', '<cmd>LspInfo<cr>', 'LSP Info')
