@@ -1,4 +1,4 @@
-theme = "catppuccin-mocha.conf"
+theme = "Gruvbox Dark Hard"
 shell-integration = "bash"
 confirm-close-surface = false
 
