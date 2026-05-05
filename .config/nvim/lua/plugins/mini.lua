@@ -33,9 +33,6 @@ return { -- Collection of various small independent plugins/modules
     -- E.G., Comment block = [c
     require('mini.bracketed').setup()
 
-    -- Helpful for diffs
-    require('mini.diff').setup()
-
     -- Autohighlight word under cursor
     require('mini.cursorword').setup()
 

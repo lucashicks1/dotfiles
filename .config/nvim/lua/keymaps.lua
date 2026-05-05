@@ -92,28 +92,6 @@ map('n', '<leader>sf', function()
 end, 'Search: Files')
 
 ---------------------------------------------------
----- Debuggin
----------------------------------------------------
-local dap = require 'dap'
-map('n', '<F5>', dap.continue, 'Debug: Start/Continue')
-map('n', '<F1>', dap.step_into, 'Debug: Step Into')
-map('n', '<F2>', dap.step_over, 'Debug: Step Over')
-map('n', '<F3>', dap.step_out, 'Debug: Step Out')
-map('n', '<F7>', require('dapui').toggle, 'Debug: See last session result')
-map('n', '<leader>Db', dap.toggle_breakpoint, 'Debug: Toggle Breakpoint')
-
-map({ 'n', 'v' }, '<leader>DB', function()
-  dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-end, 'Debug: Set Breakpoint')
-
----------------------------------------------------
----- Previewing Docs (typst, latex, etc.)
----------------------------------------------------
-local omnipreview = require 'omni-preview.commands'
-map('n', '<leader>po', omnipreview.start, 'Preview: Start')
-map('n', '<leader>pc', omnipreview.stop, 'Preview: Stop')
-
----------------------------------------------------
 ---- Files
 ---------------------------------------------------
 map('n', '-', '<CMD>Oil<CR>', 'Open parent directory')
