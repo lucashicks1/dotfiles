@@ -38,6 +38,13 @@ map('n', '<A-s-c>', '<Cmd>BufferRestore<CR>', 'Restore Buffer')
 ---------------------------------------------------
 local lsp = vim.lsp
 local telescope = require 'telescope.builtin'
+
+-- git things
+map('n', '<leader>gs', telescope.git_status, 'Git: Status')
+map('n', '<leader>gc', telescope.git_commits, 'Git: Commits')
+map('n', '<leader>gf', telescope.git_files, 'Git: Files')
+map('n', '<leader>gb', telescope.git_branches, 'Git: Branches')
+
 -- Gotos
 map('n', 'gr', telescope.lsp_references, 'LSP: Goto References')
 map('n', 'gi', telescope.lsp_implementations, 'LSP: Goto Implementation')
