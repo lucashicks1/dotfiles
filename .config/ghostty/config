@@ -1,5 +1,8 @@
 theme = "Gruvbox Dark Hard"
+
 shell-integration = "bash"
+shell-integration-features = ssh-env,ssh-terminfo
+
 confirm-close-surface = false
 
 macos-option-as-alt = true
