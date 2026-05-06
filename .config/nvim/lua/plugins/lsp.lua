@@ -2,8 +2,6 @@ return {
   -- Main LSP Configuration
   'neovim/nvim-lspconfig',
   dependencies = {
-    'williamboman/mason.nvim',
-
     { 'j-hui/fidget.nvim', opts = {} }, -- Useful status updates for LSP.
     'saghen/blink.cmp', -- Allows extra capabilities provided by blink.cmp
   },
