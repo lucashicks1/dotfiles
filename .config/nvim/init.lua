@@ -69,12 +69,17 @@ vim.g.maplocalleader = '\\'
 local pack_build = {
   ['blink.cmp'] = function() require('blink.cmp').build():pwait() end,
   ['nvim-treesitter'] = function() require('nvim-treesitter').update() end,
+  ['telescope-fzf-native.nvim'] = function(ev)
+    if vim.fn.executable('make') == 1 then
+      vim.system({ 'make' }, { cwd = ev.data.path }):wait()
+    end
+  end,
 }
 vim.api.nvim_create_autocmd('PackChanged', {
   callback = function(ev)
     local hook = pack_build[ev.data.spec.name]
     if hook and (ev.data.kind == 'install' or ev.data.kind == 'update') then
-      hook()
+      hook(ev)
     end
   end,
 })
@@ -85,7 +90,10 @@ vim.pack.add({
 
   -- core
   { src = "https://github.com/romgrk/barbar.nvim" },
-  { src = "https://github.com/ibhagwan/fzf-lua" },
+  { src = "https://github.com/nvim-telescope/telescope.nvim" },
+  { src = "https://github.com/nvim-lua/plenary.nvim" }, -- telescope dep (async)
+  { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
+  { src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
   { src = "https://github.com/nvim-mini/mini.nvim" },
   { src = "https://github.com/stevearc/oil.nvim" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
@@ -105,7 +113,7 @@ vim.pack.add({
 
 -- PLUGIN - mini.nvim
 require('mini.icons').setup()
-MiniIcons.mock_nvim_web_devicons() -- lets barbar/oil/fzf-lua use mini.icons
+MiniIcons.mock_nvim_web_devicons() -- lets barbar/oil/telescope use mini.icons
 require('mini.ai').setup { n_lines = 500 }
 require('mini.comment').setup()
 require('mini.move').setup()
@@ -137,9 +145,43 @@ require("barbar").setup({
 })
 
 
--- PLUGIN - fzf-lua
-local fzf = require('fzf-lua')
-fzf.setup({})
+-- PLUGIN - telescope
+local telescope = require('telescope')
+local tele_builtin = require('telescope.builtin') -- used by keymaps below
+telescope.setup({
+  defaults = {
+    file_ignore_patterns = {
+      '%.git/',
+      '__pycache__',
+      '%.mypy_cache',
+      '%.pytest_cache',
+      '%.ruff_cache',
+      '%.venv/',
+      'node_modules/',
+      '%.DS_Store',
+      'target/', -- rust
+      'dist/',
+      'build/',
+    },
+    mappings = {
+      i = {
+        ['<c-enter>'] = 'to_fuzzy_refine',
+      },
+      n = {
+        ['<esc>'] = require('telescope.actions').close,
+      },
+    },
+  },
+  extensions = {
+    ['ui-select'] = {
+      require('telescope.themes').get_dropdown(),
+    },
+  },
+})
+
+-- Enable telescope extensions if they are installed
+pcall(telescope.load_extension, 'fzf') -- native fzf sorter (needs `make` build)
+pcall(telescope.load_extension, 'ui-select') -- routes vim.ui.select through telescope
 
 
 -- PLUGIN - oil
@@ -271,7 +313,7 @@ vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
       diagnostics = {
-        globals = { 'vim', 'mp', 'MiniIcons' },
+        globals = { 'vim', 'mp' },
       },
     },
   },
@@ -467,9 +509,9 @@ vim.keymap.set('n', 'k', function()
 end, { expr = true, silent = true, desc = 'Up (wrap-aware)' })
 
 -- LSP
-map('n', 'gr', fzf.lsp_references, 'LSP: Goto References')
-map('n', 'gi', fzf.lsp_implementations, 'LSP: Goto Implementation')
-map('n', 'gd', fzf.lsp_definitions, 'LSP: Goto Definition')
+map('n', 'gr', tele_builtin.lsp_references, 'LSP: Goto References')
+map('n', 'gi', tele_builtin.lsp_implementations, 'LSP: Goto Implementation')
+map('n', 'gd', tele_builtin.lsp_definitions, 'LSP: Goto Definition')
 map('n', 'gD', vim.lsp.buf.declaration, 'LSP: Goto Declaration')
 map('n', '<leader>cr', vim.lsp.buf.rename, 'LSP: Rename symbol')
 map({ 'n', 'x' }, '<leader>ca', vim.lsp.buf.code_action, 'LSP: Code Actions')
@@ -493,18 +535,22 @@ map('n', '<leader>t', FloatingTerminal, 'Toggle floating terminal')
 map('t', '<Esc>', CloseFloatingTerminal, 'Close floating terminal')
 
 -- Git
-map('n', '<leader>gs', fzf.git_status, 'Git: Status')
-map('n', '<leader>gb', fzf.git_branches, 'Git: Branches')
+map('n', '<leader>gs', tele_builtin.git_status, 'Git: Status')
+map('n', '<leader>gb', tele_builtin.git_branches, 'Git: Branches')
 
 -- Search
-map('n', '<leader>sg', fzf.live_grep, 'Search: Grep')
-map('n', '<leader>sf', fzf.files, 'Search: Files')
-map('n', '<leader>sb', fzf.buffers, 'Search: Buffers')
-map('n', '<leader>sr', fzf.resume, 'Search: Resume Last')
-map('n', '<leader>sk', fzf.keymaps, 'Search: Keymaps')
-map('n', '<leader>sh', fzf.helptags, 'Search: Help')
-map('n', '<leader>sd', fzf.diagnostics_document, 'Search: Diagnostics')
-map('n', '<leader>sw', fzf.lsp_live_workspace_symbols, 'Search: Workspace Symbols')
+map('n', '<leader>sg', tele_builtin.live_grep, 'Search: Grep')
+map('n', '<leader>sf', function()
+  tele_builtin.find_files { no_ignore = true, hidden = true }
+end, 'Search: Files')
+map('n', '<leader>sb', tele_builtin.buffers, 'Search: Buffers')
+map('n', '<leader>sr', function()
+  tele_builtin.resume { initial_mode = 'normal' }
+end, 'Search: Resume in Normal Mode')
+map('n', '<leader>sk', tele_builtin.keymaps, 'Search: Keymaps')
+map('n', '<leader>sh', tele_builtin.help_tags, 'Search: Help')
+map('n', '<leader>sd', tele_builtin.diagnostics, 'Search: Diagnostics')
+map('n', '<leader>sw', tele_builtin.lsp_dynamic_workspace_symbols, 'Search: Workspace Symbols')
 
 -- Oil
 map('n', '-', '<CMD>Oil<CR>', 'Open parent directory')
