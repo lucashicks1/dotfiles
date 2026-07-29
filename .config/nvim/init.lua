@@ -314,6 +314,8 @@ vim.lsp.config('clangd', {
     '--clang-tidy',
     '--header-insertion=never',
     '--offset-encoding=utf-16',
+    -- let clangd query cross-compilers to make stm32cube's arm-none-eabi-gcc work
+    '--query-driver=/**/arm-none-eabi-*',
   },
 })
 
