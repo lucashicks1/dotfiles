@@ -1,4 +1,3 @@
-
 ---=====================
 --- Options
 ---=====================
@@ -96,7 +95,6 @@ vim.pack.add({
   { src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
   { src = "https://github.com/nvim-mini/mini.nvim" },
   { src = "https://github.com/stevearc/oil.nvim" },
-  { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/Saghen/blink.lib" },
@@ -308,59 +306,7 @@ vim.diagnostic.config {
   },
 }
 
--- configs (these merge with the defaults nvim-lspconfig provides)
-vim.lsp.config('lua_ls', {
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim', 'mp' },
-      },
-    },
-  },
-})
-
-vim.lsp.config('ruff', {
-  capabilities = {
-    general = {
-      positionEncodings = { 'utf-16' },
-    },
-  },
-})
-
-vim.lsp.config('tinymist', {
-  settings = {
-    formatterMode = 'typstyle',
-    exportPdf = 'never',
-    lint = {
-      enabled = true,
-      when = 'onSave',
-    },
-  },
-})
-
-vim.lsp.config('rust_analyzer', {
-  settings = {
-    ['rust-analyzer'] = {
-      check = {
-        command = 'clippy',
-      },
-    },
-  },
-})
-
-vim.lsp.config('clangd', {
-  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
-  cmd = {
-    'clangd',
-    '--background-index',
-    '--clang-tidy',
-    '--header-insertion=never',
-    '--offset-encoding=utf-16',
-    -- let clangd query cross-compilers to make stm32cube's arm-none-eabi-gcc work
-    '--query-driver=/**/arm-none-eabi-*',
-  },
-})
-
+-- config lives in `lsp/<name>.lua`
 vim.lsp.enable({ 'lua_ls', 'ruff', 'tinymist', 'rust_analyzer', 'clangd' })
 
 
