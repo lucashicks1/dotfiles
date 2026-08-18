@@ -113,7 +113,6 @@ vim.pack.add({
 require('mini.icons').setup()
 MiniIcons.mock_nvim_web_devicons() -- lets barbar/oil/telescope use mini.icons
 require('mini.ai').setup { n_lines = 500 }
-require('mini.comment').setup()
 require('mini.move').setup()
 require('mini.pairs').setup()
 require('mini.surround').setup()
@@ -307,7 +306,7 @@ vim.diagnostic.config {
 }
 
 -- config lives in `lsp/<name>.lua`
-vim.lsp.enable({ 'lua_ls', 'ruff', 'tinymist', 'rust_analyzer', 'clangd' })
+vim.lsp.enable({ 'lua_ls', 'ruff', 'ty', 'tinymist', 'rust_analyzer', 'clangd' })
 
 
 -- PLUGIN - conform (formatting)
