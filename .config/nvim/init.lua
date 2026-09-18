@@ -308,7 +308,7 @@ vim.diagnostic.config {
 }
 
 -- config lives in `lsp/<name>.lua`
-vim.lsp.enable({ 'lua_ls', 'ruff', 'ty', 'tinymist', 'rust_analyzer', 'clangd', 'julials', 'jetls'})
+vim.lsp.enable({ 'lua_ls', 'ruff', 'ty', 'tinymist', 'rust_analyzer', 'clangd', 'jetls'})
 
 
 -- PLUGIN - conform (formatting)
