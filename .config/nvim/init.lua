@@ -9,9 +9,9 @@ vim.o.breakindent = true
 vim.o.scrolloff = 12 -- number of screen lines to keep above and below the cursor.
 vim.o.sidescrolloff = 12 -- keep 12 lines left/right of cursor
 
-vim.o.tabstop = 2 -- tab width
-vim.o.shiftwidth = 2 -- indent width
-vim.o.softtabstop = 2 -- soft tab stops not tabs
+vim.o.tabstop = 4 -- tab width
+vim.o.shiftwidth = 4 -- indent width
+vim.o.softtabstop = 4 -- soft tab stops not tabs
 vim.o.expandtab = true -- use spaces instead of tabs
 vim.o.smartindent = true -- smart
 vim.o.autoindent = true -- copy indent from current line
@@ -32,7 +32,7 @@ vim.o.showmode = false -- do not show the mode, instead have it in statusline
 vim.o.pumheight = 10 -- popup menu height
 vim.o.pumblend = 10 -- popup menu transparency
 vim.o.winblend = 0 -- floating window transparency
-vim.o.conceallevel = 2 -- obsidian requirement
+vim.o.conceallevel = 0
 vim.o.concealcursor = "" -- do not hide cursorline in markup
 vim.o.synmaxcol = 300 -- syntax highlighting limit
 vim.opt.fillchars = { eob = " " } -- hide "~" on empty lines
@@ -98,6 +98,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   { src = "https://github.com/Saghen/blink.cmp" },
   { src = "https://github.com/Saghen/blink.lib" },
+  { src = "https://github.com/sindrets/diffview.nvim" },
 
   -- editing / formatting
   { src = "https://github.com/stevearc/conform.nvim" },
@@ -229,6 +230,7 @@ require('nvim-treesitter').install({
   "toml",
   "rust",
   "typst",
+  "julia",
 })
 vim.api.nvim_create_autocmd('FileType', {
   desc = 'Enable treesitter highlighting/indent where a parser exists',
@@ -306,7 +308,7 @@ vim.diagnostic.config {
 }
 
 -- config lives in `lsp/<name>.lua`
-vim.lsp.enable({ 'lua_ls', 'ruff', 'ty', 'tinymist', 'rust_analyzer', 'clangd' })
+vim.lsp.enable({ 'lua_ls', 'ruff', 'ty', 'tinymist', 'rust_analyzer', 'clangd', 'julials', 'jetls'})
 
 
 -- PLUGIN - conform (formatting)
